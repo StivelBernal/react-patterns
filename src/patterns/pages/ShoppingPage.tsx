@@ -1,5 +1,6 @@
-import { ProductCard, ProductTitle } from '../components/ProductCard';
-import { Product } from '../interfaces/interfaces';
+import { ProductCard, ProductTitle } from '../components/ProductCard'
+import { Product } from '../interfaces/interfaces'
+import '../styles/custom-styles.css'
 
 const products: Product[] = [
   {
@@ -19,14 +20,14 @@ const products: Product[] = [
 
 export const ShoppingPage = () => {
   return (
-    <div>
+    <div >
       <h1>Shopping store</h1>
       <hr />
       <div style={{display: 'flex', flexWrap: 'wrap'}}>
         { products.map((x: Product, index: number) => 
-          <ProductCard key={index} product={x} >
+          <ProductCard className='bg-dark' key={index} product={x} >
               <ProductCard.Image />
-              <ProductTitle title={'Test'} />
+              <ProductTitle title={'Test'} className='text-white'/>
               <ProductCard.Buttons />
           </ProductCard>
         )}
@@ -35,25 +36,3 @@ export const ShoppingPage = () => {
     </div>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

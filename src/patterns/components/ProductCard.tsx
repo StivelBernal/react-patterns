@@ -6,10 +6,11 @@ import { Product, ProductContextProps } from '../interfaces/interfaces'
 
 const ProductContext = createContext({} as ProductContextProps)
 const { Provider } = ProductContext
-
 interface Props {
   product : Product,
-  children ?: JSX.Element[],
+  className ?: string,
+  style ?: React.CSSProperties,
+  children ?: JSX.Element[] | React.ReactElement,
 }
 
 export const ProductImage = () => {
@@ -20,12 +21,12 @@ export const ProductImage = () => {
   )
 }
 
-export const ProductTitle = ({title}: { title: string}) => {
+export const ProductTitle = ({title, className}: { title: string, className ?: string}) => {
 
   const { product } = useContext( ProductContext )
 
   return (
-    <span className={ styles.productDescription } >{title ? title : product.title}</span>
+    <span className={ styles.productDescription + ' '+ className } >{title ? title : product.title}</span>
   )
 }
 
@@ -44,8 +45,7 @@ export const ProductButtons = () => {
   )
 }
 
-
-export const ProductCard = ({product, children}: Props) => {
+export const ProductCard = ({product, children, className, style}: Props) => {
 
   const {count, increaseBy} = useProduct()
 
@@ -53,7 +53,7 @@ export const ProductCard = ({product, children}: Props) => {
     <Provider value={{
       count, increaseBy, product
     }}>
-      <div className={ styles.productCard }>
+      <div style={style} className={ className + ' ' + styles.productCard }>
           {children}
 
         {/* <ProductImage img={product.img} title={product.title} />
@@ -63,8 +63,6 @@ export const ProductCard = ({product, children}: Props) => {
   )
 }
 
-
 ProductCard.Title = ProductTitle
 ProductCard.Image = ProductImage
 ProductCard.Buttons = ProductButtons
-
